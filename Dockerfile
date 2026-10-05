@@ -1,5 +1,5 @@
-FROM nginx:alpine
+FROM nginxinc/nginx-unprivileged:alpine
 
-COPY . /usr/share/nginx/html
+COPY site/ /usr/share/nginx/html
 
-EXPOSE 80 443
+EXPOSE 8080
