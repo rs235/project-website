@@ -9,6 +9,8 @@ on:
       - "site/**"
       - ".dockerignore"
 
+  workflow_dispatch:
+
 jobs:
 
   docker-image-build:
