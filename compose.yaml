@@ -1,0 +1,51 @@
+name: portfolio
+
+services:
+  backend:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      PHOTO_DIR: /app/photos
+      CACHE_DIR: /app/cache
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,noexec,nosuid
+    volumes:
+      - ${PHOTO_DIR:-./photos}:/app/photos:ro
+      - photo_cache:/app/cache
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3000/api/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 120s
+    networks:
+      - backend
+
+  frontend:
+    build:
+      context: ./frontend
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "${WEB_BIND_ADDRESS:-127.0.0.1}:${WEB_PORT:-8080}:8080"
+    networks:
+      - edge
+      - backend
+
+volumes:
+  photo_cache:
+
+networks:
+  edge:
+  backend:
+    internal: true
