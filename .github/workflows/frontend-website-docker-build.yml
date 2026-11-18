@@ -1,13 +1,11 @@
-name: Docker Image Build
+name: Frontend - Docker Image Build
 
 on:
   push:
     branches:
       - main
     paths:
-      - "Dockerfile"
-      - "site/**"
-      - ".dockerignore"
+      - "frontend"
 
   workflow_dispatch:
 
@@ -29,7 +27,7 @@ jobs:
 
       - name: Build and Push Docker image
         run: |
-          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/website
+          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/portfolio-website-frontend
           TAG=$(date +%s)
 
           docker build -t $IMAGE_NAME:$TAG .
