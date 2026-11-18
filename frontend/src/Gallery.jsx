@@ -44,7 +44,7 @@ export default function Gallery() {
 
   const loadPhotos = useCallback(async () => {
     try {
-      const response = await fetch('/api/photos', { cache: 'no-store' });
+      const response = await fetch('/backend/photos', { cache: 'no-store' });
       if (!response.ok) throw new Error(`Request failed (${response.status})`);
       const data = await response.json();
       const sortedPhotos = data.photos || [];
