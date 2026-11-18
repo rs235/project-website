@@ -7,11 +7,11 @@ const app = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 
-app.get('/api/health', (_request, response) => {
+app.get('/backend/health', (_request, response) => {
   response.status(200).json({ status: 'ok' });
 });
 
-app.get('/api/photos', (_request, response) => {
+app.get('/backend/photos', (_request, response) => {
   response.set('Cache-Control', 'no-store');
   response.json({ photos: listPhotos() });
 });
