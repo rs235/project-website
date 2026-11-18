@@ -30,7 +30,7 @@ jobs:
           IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/portfolio-website-backend
           TAG=$(date +%s)
 
-          docker build -t $IMAGE_NAME:$TAG .
+          docker build -t $IMAGE_NAME:$TAG ./backend
           docker tag $IMAGE_NAME:$TAG $IMAGE_NAME:latest
 
           docker push $IMAGE_NAME:$TAG
