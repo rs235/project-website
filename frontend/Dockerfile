@@ -1,4 +1,4 @@
-FROM node:26-bookworm-slim AS build
+FROM node:26-trixie-slim AS build
 
 WORKDIR /app
 COPY package.json ./
@@ -8,7 +8,7 @@ COPY index.html ./
 COPY src ./src
 RUN npm run build
 
-FROM nginxinc/nginx-unprivileged:stable-alpine
+FROM nginx/nginx-unprivileged:mainline-alpine
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
