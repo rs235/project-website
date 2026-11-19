@@ -13,9 +13,6 @@ export default function About() {
           It shows a practical skill of infrastructure provisioning and application deployment using tools like Terraform, Ansible, Docker Compose, Kubernetes, Argo CD and more.
           Website itself has been built with AI using Node JS and React and should not be treated as proof of proficiency in those technologies.
         </p>
-        <p className="about-contact">
-          Contact: <a href="mailto:hello@example.com">hello@example.com</a>
-        </p>
       </article>
     </main>
   );
